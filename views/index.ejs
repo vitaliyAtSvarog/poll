@@ -1,0 +1,48 @@
+﻿<html>
+<head>
+	<title>Svarog Systems: Ответы на опрос</title>
+</head>
+<body style="font-size: 130%">
+<div id="answers">
+    <h1>Svarog Systems: Ответы на опрос</h1>
+	<h2>Обо мне:</h2>
+    <p>
+		Фамилия: <%= lastName %><br/>
+		Имя: <%= firstName %></br>
+		Дата рождения: <%= birthDate %></br>
+		Должность: <%= position %>
+	</p>
+	<ul style="list-style-type: none;">
+	<% for (var i = 0; i < aboutMe.length; i++) { %>
+		<li> 
+			<p><%= i + 1 %>: <%= aboutMe[i].question %></p>
+			<p><%= aboutMe[i].answer %></p>
+		</li>
+	<% } %>
+	</ul>
+	<h2>О Компании:</h2>
+	<ul style="list-style-type: none;">
+	<% for (var i = 0; i < aboutCompany.length; i++) { %>
+		<li>
+			<p><%= i + 1 %>: <%= aboutCompany[i].question %></p>
+			<p><%= aboutCompany[i].answer %></p>
+		</li>
+	<% } %>
+	</ul>
+</div>
+<button id="sendButton">Скопировать в буфер</button>
+<script>
+	document.getElementById('sendButton').addEventListener('click', function() {
+		var input = document.createElement('TEXTAREA');
+		input.setAttribute('style', 'position:absolute;opacity:0;');
+		document.body.appendChild(input);
+		input.value = document.getElementById('answers').innerText;
+		input.focus();
+		input.select();
+		document.execCommand('copy');
+		document.body.removeChild(input);
+		alert('Анкета скопирована в буфер обмена');
+	});
+</script>
+</body>
+</html>
